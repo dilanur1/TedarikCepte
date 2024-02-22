@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TedarikCepte</string>
+    <string name="cepte">CEPTE</string>
+    <string name="kullanici_adi">Kullanıcı Adı</string>
+    <string name="parola">Parola</string>
+    <string name="sifremi_unuttum">Şifremi Unuttum</string>
+    <string name="tedar_k">TEDARİK</string>
+    <string name="g_r_yap">GİRİŞ YAP</string>
+    <string name="kay_t_ol">Kayıt Ol</string>
+</resources>
