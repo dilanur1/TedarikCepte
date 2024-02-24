@@ -4,7 +4,14 @@
     <string name="kullanici_adi">Kullanıcı Adı</string>
     <string name="parola">Parola</string>
     <string name="sifremi_unuttum">Şifremi Unuttum</string>
-    <string name="tedar_k">TEDARİK</string>
-    <string name="g_r_yap">GİRİŞ YAP</string>
-    <string name="kay_t_ol">Kayıt Ol</string>
+    <string name="tedarik">TEDARİK</string>
+    <string name="giris_yap">GİRİŞ YAP</string>
+    <string name="kayit_ol">Kayıt Ol</string>
+    <string name="ayarlar">Ayarlar</string>
+    <string name="siparislerim">Siparişlerim</string>
+    <string name="anasayfa">Anasayfal</string>
+    <string name="hesabim">Hesabım</string>
+    <string name="sepetim">Sepetim</string>
+    <string name="meyve">Meyve</string>
+    <string name="sebze">Sebze</string>
 </resources>

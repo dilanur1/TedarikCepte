@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
-val database_name = "TedarikCepte"
-val table_name = "Users"
+val database_name_users = "TedarikCepte"
+val table_name_users = "Users"
 
-val col_id = "id"
+val col_id_users = "id"
 val col_name = "ad"
 val col_surname = "soyad"
 val col_firm = "firma"
@@ -18,12 +18,12 @@ val col_phone = "telefon"
 val col_username = "kullaniciAdi"
 val col_password = "parola"
 
-class DatabaseHelper (var context: Context):SQLiteOpenHelper(context, database_name, null, 1) {
+class DatabaseHelper (var context: Context):SQLiteOpenHelper(context, database_name_users, null, 1) {
     //class SignUpActvitiy: AppCompatActivity()
     val signUpActivity = SignUpActivity()
     override fun onCreate(db: SQLiteDatabase?) {
-        var createTable = " CREATE TABLE " + table_name + "(" +
-                col_id + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+        var createTable = " CREATE TABLE " + table_name_users + "(" +
+                col_id_users + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 col_name + " VARCHAR(256)," +
                 col_surname + " VARCHAR(256)," +
                 col_firm + " VARCHAR(256)," +
@@ -49,7 +49,7 @@ class DatabaseHelper (var context: Context):SQLiteOpenHelper(context, database_n
         cv.put(col_username, user.kullaniciAdi)
         cv.put(col_password, user.parola)
 
-        var sonuc = db.insert(table_name, null, cv)
+        var sonuc = db.insert(table_name_users, null, cv)
 
         if (sonuc == (-1).toLong()) {
             Toast.makeText(context, "Hata!", Toast.LENGTH_LONG).show()
