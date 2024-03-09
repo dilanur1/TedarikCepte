@@ -1,3 +1,4 @@
+/*
 package com.example.tedarikcepte
 
 import android.content.ContentValues
@@ -5,6 +6,11 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import androidx.room.Query
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.SQLException
+import androidx.contentpager.content.Query as Query1
 
 val database_name_users = "TedarikCepte"
 val table_name_users = "Users"
@@ -18,7 +24,21 @@ val col_phone = "telefon"
 val col_username = "kullaniciAdi"
 val col_password = "parola"
 
-class DatabaseHelper (var context: Context):SQLiteOpenHelper(context, database_name_users, null, 1) {
+class UserDatabase (var context: Context):SQLiteOpenHelper(context, database_name_users, null, 1) {
+
+    fun getConnection(): Connection? {
+        var connection: Connection? = null
+        try {
+            val url = "jdbc:postgresql://localhost:5433/TedarikCepte"
+            val user = "postgres"
+            val password = "deb.deb"
+            connection = DriverManager.getConnection(url, user, password)
+            val statement = connection.createStatement();
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        }
+        return connection
+    }
     //class SignUpActvitiy: AppCompatActivity()
     val signUpActivity = SignUpActivity()
     override fun onCreate(db: SQLiteDatabase?) {
@@ -58,4 +78,10 @@ class DatabaseHelper (var context: Context):SQLiteOpenHelper(context, database_n
             signUpActivity.switchToLoginPage()
         }
     }
-}
+
+    fun getData() {
+        var getData = " SELECT * FROM " + table_name_users
+    }
+
+
+}*/

@@ -9,9 +9,10 @@
     <string name="kayit_ol">Kayıt Ol</string>
     <string name="ayarlar">Ayarlar</string>
     <string name="siparislerim">Siparişlerim</string>
-    <string name="anasayfa">Anasayfal</string>
+    <string name="anasayfa">Anasayfa</string>
     <string name="hesabim">Hesabım</string>
     <string name="sepetim">Sepetim</string>
     <string name="meyve">Meyve</string>
     <string name="sebze">Sebze</string>
+
 </resources>

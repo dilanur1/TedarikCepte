@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.TedarikCepte" parent="Base.Theme.TedarikCepte" />
+
+    <style name="textStyleBold" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

@@ -9,7 +9,8 @@
     <color name="lightgreen">#ACD8AE</color>
     <color name="backg_green">#F4FFF4</color>
     <color name="darkgreen">#4A704B</color>
-    <color name="transparentDarkWhite">#80FFFFFF</color>
-
+    <color name="transparentWhite">#80FFFFFF</color>
+    <color name="transparentGreen">#80ACD8AE</color>
+    <color name="darkGray">#404040</color>
 
 </resources>
