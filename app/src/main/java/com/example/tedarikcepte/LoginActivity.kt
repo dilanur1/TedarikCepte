@@ -23,6 +23,7 @@ import org.json.JSONObject
 class LoginActivity: AppCompatActivity() {
 
     private val LOGIN_REQUEST_CODE = 100
+    lateinit var sessionManagement: SessionManagement
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -33,6 +34,8 @@ class LoginActivity: AppCompatActivity() {
         val passwordField: EditText = findViewById(R.id.passwordField)
         val passwordShowIcon: ImageView = findViewById(R.id.passwordShowIcon)
         val passwordHideIcon: ImageView = findViewById(R.id.passwordHideIcon)
+        sessionManagement = SessionManagement(this)
+
 
 
         fun goToSignUpActivity() {
@@ -41,12 +44,7 @@ class LoginActivity: AppCompatActivity() {
             finish()
         }
 
-        fun goToMainActivity() {
-            val goToMainActivity = Intent(this, MainActivity::class.java)
-            startActivity(goToMainActivity)
-            //onActivityResult()
-            finish()
-        }
+
 
 
         fun validateUsername(): Boolean {
@@ -83,16 +81,25 @@ class LoginActivity: AppCompatActivity() {
             params.put("username", usernameField.text.toString())
             params.put("password", passwordField.text.toString())
 
-            val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, JSONObject(
+            val jsonObjectRequest = object: JsonObjectRequest(Request.Method.POST, url, JSONObject(
                 params as Map<String, String>
             ),
                 Response.Listener<JSONObject> {response: JSONObject ->
                     try {
 
-                        val username = response.get("username").toString()
+                        val user_id = response.getLong("user_id")
+                        val first_name = response.get("first_name").toString()
+                        val last_name = response.get("last_name").toString()
                         val firm = response.get("firm").toString()
+                        val address = response.get("address").toString()
+                        val phone = response.get("phone").toString()
+                        val username = response.get("username").toString()
+                        val password = response.get("password").toString()
 
-                        val goToProfile = Intent(this, ProfileActivity::class.java)
+                        val user = User(user_id, first_name, last_name, firm, address, phone, username, password)
+                        sessionManagement.saveSession(user)
+                        sessionManagement.saveUser(user)
+
                         goToMainActivity()
 
 
@@ -111,7 +118,7 @@ class LoginActivity: AppCompatActivity() {
                     error.printStackTrace()
                     System.out.println(error)
                     Toast.makeText(this, "Kullanıcı adı veya şifre geçersiz!", Toast.LENGTH_LONG).show()
-            })
+            }) {}
 
             requestQueue.add(jsonObjectRequest)
         }
@@ -142,5 +149,25 @@ class LoginActivity: AppCompatActivity() {
 
     }
 
+    fun goToMainActivity() {
+        val goToMainActivity = Intent(this, MainActivity::class.java)
+        goToMainActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(goToMainActivity)
+        //onActivityResult()
+        finish()
+    }
+
+    private fun checkSession() {
+
+        val user_id: Long = sessionManagement.getSession()
+        if(user_id != -1L) {
+            goToMainActivity()
+        }
+    }
+    override fun onStart() {
+        super.onStart()
+
+        checkSession()
+    }
 
 }

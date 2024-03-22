@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 
 class RecyclerViewFruitAdapter(
@@ -45,6 +50,16 @@ class RecyclerViewFruitAdapter(
 
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val meyveTitle : TextView = itemView.findViewById(R.id.category)
         val meyveImg : ImageView = itemView.findViewById(R.id.productImg)
@@ -54,20 +69,16 @@ class RecyclerViewFruitAdapter(
 
         init {
             addToCartBtn.setOnClickListener {
-                val position = adapterPosition
-                if(position != RecyclerView.NO_POSITION) {
-                    val selectedFruit = fruitList[position]
-                    addToCart(selectedFruit)
-                }
+                listener?.onItemClick(adapterPosition)
             }
         }
 
         private fun addToCart(fruit: Fruit) {
-            val intent = Intent(context, CartActivity::class.java)
+/*            val intent = Intent(context, CartActivity::class.java)
             intent.putExtra("fruitCategory", meyveTitle.text.toString())
             intent.putExtra("fruitPrice", meyveFiyat.text.toString())
 
-            context.startActivity(intent)
+            context.startActivity(intent)*/
         }
     }
 

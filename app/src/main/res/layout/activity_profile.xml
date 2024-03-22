@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backg_green"
     android:orientation="vertical"
-    android:background="@color/green"
     tools:context=".ProfileActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,6 +15,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:background="@color/transparentGreen"
             android:clickable="true"
             android:padding="14dp"
             android:src="@drawable/arrow_back" />
@@ -21,11 +23,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hesabim"
             android:layout_centerInParent="true"
+            android:text="@string/hesabim"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
@@ -39,31 +41,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/circle_light_green"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/circle_light_green"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
-                    <ImageView
-                        android:id="@+id/user"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_person_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/circle_light_green"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/circle_light_green"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/user"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/baseline_person_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </FrameLayout>
 
 
             <TextView
@@ -73,7 +74,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="Dila1"
-                android:textColor="@color/white"
+                android:textColor="@color/green"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,14 +84,15 @@
 
             <LinearLayout
                 android:id="@+id/backg1"
-                android:background="@drawable/hesabim_backg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/hesabim_backg"
                 android:orientation="vertical"
                 android:padding="15dp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -99,29 +101,30 @@
                         android:id="@+id/siparislerim_icon"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/check_box"
-                        android:padding="12dp"/>
+                        android:padding="12dp"
+                        android:src="@drawable/check_box" />
 
                     <TextView
                         android:id="@+id/siparis_gör_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/siparislerim_icon"
                         android:text="Tüm siparişlerimi gör"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/siparislerim_icon"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/baseline_arrow_forward_ios_24"
-                        android:layout_alignParentEnd="true" />
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
 
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/iptal_layout"
                     android:layout_width="match_parent"
@@ -131,39 +134,38 @@
                         android:id="@+id/siparis_iptal_icon"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/baseline_cancel_24"
-                        android:padding="12dp"/>
+                        android:padding="12dp"
+                        android:src="@drawable/baseline_cancel_24" />
 
                     <TextView
                         android:id="@+id/iptal_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/siparis_iptal_icon"
                         android:text="Siparişimi iptal et"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/siparis_iptal_icon"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/baseline_arrow_forward_ios_24"
                         android:layout_alignParentEnd="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
 
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/backg2"
-                android:background="@drawable/hesabim_backg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/hesabim_backg"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -175,29 +177,29 @@
                         android:id="@+id/update_icon"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/baseline_change_circle_24"
-                        android:padding="12dp"/>
+                        android:padding="12dp"
+                        android:src="@drawable/baseline_change_circle_24" />
 
                     <TextView
                         android:id="@+id/guncelle_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/update_icon"
                         android:text="Kullanıcı bilgilerimi güncelle"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/update_icon"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/baseline_arrow_forward_ios_24"
                         android:layout_alignParentEnd="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -206,27 +208,26 @@
                         android:id="@+id/update_icon2"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/baseline_change_circle_24"
-                        android:padding="12dp"/>
+                        android:padding="12dp"
+                        android:src="@drawable/baseline_change_circle_24" />
 
                     <TextView
                         android:id="@+id/guncelle_text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/update_icon2"
                         android:text="Şifremi değiştir"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/update_icon2"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/baseline_arrow_forward_ios_24"
                         android:layout_alignParentEnd="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/baseline_arrow_forward_ios_24" />
 
                 </RelativeLayout>
 

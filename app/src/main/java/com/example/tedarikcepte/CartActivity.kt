@@ -14,7 +14,7 @@ import org.json.JSONObject
 class CartActivity: AppCompatActivity() {
     private lateinit var  backBtn: ImageView
     private  lateinit var recyclerView: RecyclerView
-    private  lateinit var productsInCartAdapter: ProductsInCartAdapter
+    /*private  lateinit var productsInCartAdapter: ProductsInCartAdapter*/
     private lateinit var cartViewModel: CartViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +30,18 @@ class CartActivity: AppCompatActivity() {
 
         cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
 
-
-
-
-
-
-
-
-        val layoutManager : RecyclerView.LayoutManager = GridLayoutManager(this, 1)
+/*
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 1)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = productsInCartAdapter
-        if (category != null) {
+        recyclerView.adapter = productsInCartAdapter*/
+/*        if (category != null) {
             if (price != null) {
                 addDataToCartList(category, price)
             }
         }
         val productsInCartList = cartViewModel.getProducts()
         productsInCartAdapter = ProductsInCartAdapter(this@CartActivity, productsInCartList, this)
-        cartViewModel.getProducts()
+        cartViewModel.getProducts()*/
 
 
     }
@@ -72,12 +66,14 @@ class CartActivity: AppCompatActivity() {
 
          if(category == "üzüm") {category = "uzum"}*/
 
+/*
 
         val priceWithoutTL = price.split(" ")[0]
         var product: Product? = null
-        product = Fruit(category, category, priceWithoutTL.toDouble(), "12".toInt())
+        product = Fruit(null, category, category, priceWithoutTL.toDouble())
         cartViewModel.addProduct(product)
 
+*/
 
 /*
         product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
@@ -98,12 +94,12 @@ class CartActivity: AppCompatActivity() {
         productsInCartList.add(product)
         product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
         productsInCartList.add(product)*/
-        productsInCartAdapter!!.notifyDataSetChanged()
+       /* productsInCartAdapter!!.notifyDataSetChanged()*/
     }
 
-    private fun getProductsInCart() {
+/*    private fun getProductsInCart() {
         cartViewModel.getProducts()
-    }
+    }*/
 
 
 }

@@ -12,12 +12,15 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var sessionManagement: SessionManagement
+    lateinit var tv_username: TextView
+    lateinit var tv_firm: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var tv_username : TextView = findViewById(R.id.username)
-        var tv_firm : TextView = findViewById(R.id.firm)
+        tv_username = findViewById(R.id.username)
+        tv_firm = findViewById(R.id.firm)
 
         val meyveButton: ImageView =findViewById(R.id.meyveIcon)
         meyveButton.setOnClickListener(View.OnClickListener {
@@ -51,6 +54,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        sessionManagement = SessionManagement(this)
+        val user = sessionManagement.getUser()
+        tv_username.text= user["username"].toString()
+        tv_firm.text = user["firm"].toString()
     }
 
 
