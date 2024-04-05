@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val meyveButton: ImageView =findViewById(R.id.meyveIcon)
         meyveButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, FruitActivitiy::class.java)
+            val intent = Intent(this, FruitActivity::class.java)
             startActivity(intent)
         })
 
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         val sebzeButton: ImageView =findViewById(R.id.sebzeIcon)
         sebzeButton.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, VegetablesActivity::class.java)
+            val intent = Intent(this, VegetableActivity::class.java)
             startActivity(intent)
         })
 

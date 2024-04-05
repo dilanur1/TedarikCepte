@@ -5,12 +5,14 @@
     <color name="orange">#D15A24</color>
     <color name="lightorange">#D8655E</color>
     <color name="darkwhite">#E4E0DE</color>
-    <color name="green">#5F9161</color>
-    <color name="lightgreen">#ACD8AE</color>
+    <color name="green">#1DD882</color>
+    <color name="lightgreen">#80ECBC</color>
     <color name="backg_green">#F4FFF4</color>
-    <color name="darkgreen">#4A704B</color>
+    <color name="darkgreen">#068C46</color>
     <color name="transparentWhite">#80FFFFFF</color>
     <color name="transparentGreen">#80ACD8AE</color>
     <color name="darkGray">#404040</color>
-
+    <color name="green_cart">#56AC61</color>
+    <color name="disableBtn">#cccccc</color>
+    <color name="disableTxt">#666666</color>
 </resources>

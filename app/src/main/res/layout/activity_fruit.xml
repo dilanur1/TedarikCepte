@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backg_green"
-    tools:context=".FruitActivitiy">
+    tools:context=".FruitActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout2"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/darkgreen"
             app:fabCradleRoundedCornerRadius="80dp"
             app:fabCradleVerticalOffset="6dp">
 
@@ -32,7 +32,7 @@
                 android:paddingTop="4dp">
 
                 <LinearLayout
-                    android:id="@+id/homeLayout"
+                    android:id="@+id/homepageLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.19"
@@ -40,14 +40,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/anasayfa_icon"
+                        android:id="@+id/homepageIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:src="@drawable/home" />
 
                     <TextView
-                        android:id="@+id/anasayfa_text"
+                        android:id="@+id/homepageTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/anasayfa"
@@ -56,31 +56,6 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-                <!--                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.19"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/siparislerim_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="4dp"
-                        android:src="@drawable/check_box" />
-
-                    <TextView
-                        android:id="@+id/siparislerim_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/siparislerim"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>-->
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,14 +67,14 @@
 
 
                     <ImageView
-                        android:id="@+id/sepetim_icon"
+                        android:id="@+id/cartIcon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/baseline_shopping_cart_24" />
 
                     <TextView
-                        android:id="@+id/sepetim_text"
+                        android:id="@+id/cartTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/sepetim"
@@ -109,33 +84,8 @@
                         android:visibility="invisible" />
                 </LinearLayout>
 
-                <!--                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.19"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/ayarlar_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="4dp"
-                        android:src="@drawable/settings" />
-
-                    <TextView
-                        android:id="@+id/ayarlar_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ayarlar"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>-->
-
-
                 <LinearLayout
-                    android:id="@+id/hesabimLayout"
+                    android:id="@+id/profileLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.19"
@@ -143,14 +93,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/hesabim_icon"
+                        android:id="@+id/profileIcon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:src="@drawable/baseline_person_pin_24" />
 
                     <TextView
-                        android:id="@+id/hesabim_text"
+                        android:id="@+id/profileTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/hesabim"
@@ -164,22 +114,22 @@
 
 
         <ImageView
-            android:id="@+id/circlewhite"
+            android:id="@+id/circleWhite"
             android:layout_width="90dp"
             android:layout_height="88dp"
             android:src="@drawable/circlewhite"
-            app:layout_anchor="@+id/sepetimButton"
+            app:layout_anchor="@+id/cartBtn"
             app:layout_anchorGravity="center">
 
         </ImageView>
 
         <ImageButton
-            android:id="@+id/sepetimButton"
+            android:id="@+id/cartBtn"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="72dp"
             android:layout_height="70dp"
             android:background="@drawable/circlewhite"
-            android:backgroundTint="@color/lightgreen"
+            android:backgroundTint="@color/green"
             android:clickable="true"
             android:elevation="10dp"
             android:padding="15dp"
@@ -230,21 +180,11 @@
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/arrow_back" />
 
-                    <TextView
-                        android:id="@+id/tedarikCepteTop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:text="Tedarik Cepte"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/titleTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -252,8 +192,7 @@
                     android:text="Meyve"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
-
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -275,7 +214,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
+                    app:layout_constraintTop_toBottomOf="@+id/titleTxt">
 
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/searchView"
@@ -313,13 +252,13 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/meyveRV"
+                        android:id="@+id/fruitRV"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

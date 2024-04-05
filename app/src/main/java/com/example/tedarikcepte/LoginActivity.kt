@@ -1,7 +1,10 @@
 package com.example.tedarikcepte
 
+import android.Manifest.permission.SEND_SMS
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
@@ -11,6 +14,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.android.volley.Request
 import com.android.volley.Response
@@ -22,8 +27,9 @@ import org.json.JSONObject
 
 class LoginActivity: AppCompatActivity() {
 
-    private val LOGIN_REQUEST_CODE = 100
+    private val REQUEST_SMS = 123
     lateinit var sessionManagement: SessionManagement
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -34,6 +40,9 @@ class LoginActivity: AppCompatActivity() {
         val passwordField: EditText = findViewById(R.id.passwordField)
         val passwordShowIcon: ImageView = findViewById(R.id.passwordShowIcon)
         val passwordHideIcon: ImageView = findViewById(R.id.passwordHideIcon)
+        val forgotPasswordTxt: TextView = findViewById(R.id.forgotPasswordTxt)
+
+
         sessionManagement = SessionManagement(this)
 
 
@@ -144,9 +153,34 @@ class LoginActivity: AppCompatActivity() {
             passwordHideIcon.isVisible = false
         }
 
+        forgotPasswordTxt.setOnClickListener {
+
+            if (ContextCompat.checkSelfPermission(this, SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(SEND_SMS), REQUEST_SMS)
+            } else {
+                sendSMS()
+            }
+        }
 
 
+    }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_SMS) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                sendSMS()
+            }
+        }
+    }
+
+    private fun sendSMS() {
+        val phoneNumber = "05312512520"
+        val message = "Mesajınız iletildi"
+
+        val smsManager: SmsManager = SmsManager.getDefault()
+        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
     }
 
     fun goToMainActivity() {

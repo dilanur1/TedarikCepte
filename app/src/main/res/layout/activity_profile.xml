@@ -4,37 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backg_green"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/transparentGreen"
             android:clickable="true"
             android:padding="14dp"
-            android:src="@drawable/arrow_back" />
+            android:src="@drawable/black_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/hesabim"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
 
 
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,20 +52,11 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/circle_light_green"
+                    android:src="@drawable/user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/user"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/baseline_person_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
             </FrameLayout>
 
 
@@ -74,7 +67,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="Dila1"
-                android:textColor="@color/green"
+                android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +82,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/hesabim_backg"
+                android:background="@drawable/cart_backg"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -165,7 +158,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/hesabim_backg"
+                android:background="@drawable/cart_backg"
                 android:orientation="vertical"
                 android:padding="15dp">
 

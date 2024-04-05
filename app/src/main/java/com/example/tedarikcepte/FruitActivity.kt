@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
@@ -25,32 +25,42 @@ import org.json.JSONObject
 import java.io.UnsupportedEncodingException
 
 
-class FruitActivitiy : AppCompatActivity() {
+class FruitActivity : AppCompatActivity() {
 
     //val progressBar: ProgressBar = findViewById(R.id.progressBar)
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewFruitAdapter: RecyclerViewFruitAdapter
     private var fruitList = mutableListOf<Fruit>()
     private lateinit var searchView: SearchView
-    private lateinit var homeLayout: LinearLayout
+    private lateinit var homepageLayout: LinearLayout
+    private lateinit var cartBtn: ImageButton
+    private lateinit var backBtn: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruit)
 
-        recyclerView = findViewById(R.id.meyveRV)
+        recyclerView = findViewById(R.id.fruitRV)
         searchView = findViewById(R.id.searchView)
         val sessionManagement = SessionManagement(this)
 
 
-        homeLayout = findViewById(R.id.homeLayout)
-        homeLayout.setOnClickListener(View.OnClickListener {
+        homepageLayout = findViewById(R.id.homepageLayout)
+        homepageLayout.setOnClickListener(View.OnClickListener {
             goToHomeActivity()
         })
 
-        //fruitList = ArrayList()
-        recyclerViewFruitAdapter = RecyclerViewFruitAdapter(this@FruitActivitiy, fruitList, this)
+        cartBtn = findViewById(R.id.cartBtn)
+        cartBtn.setOnClickListener(View.OnClickListener {
+            goToCartActivity()
+        })
+
+        backBtn.setOnClickListener {
+            goBack()
+        }
+
+        recyclerViewFruitAdapter = RecyclerViewFruitAdapter(this@FruitActivity, fruitList, this)
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 2)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = recyclerViewFruitAdapter
@@ -58,11 +68,11 @@ class FruitActivitiy : AppCompatActivity() {
 
         recyclerViewFruitAdapter.setOnItemClickListener(object :
             RecyclerViewFruitAdapter.OnItemClickListener {
-            val quantity = 8.0
+
             override fun onItemClick(position: Int) {
                 val user = sessionManagement.getUser()
                 val userId = user["user_id"] as Long
-                showQuantityDialog(this@FruitActivitiy) { quantity ->
+                showQuantityDialog(this@FruitActivity) { quantity ->
 
                     makeAddToCartRequest(fruitList[position], userId, quantity)
                 }
@@ -84,6 +94,11 @@ class FruitActivitiy : AppCompatActivity() {
 
 
     }
+    private fun goBack() {
+        backBtn.setOnClickListener {
+            finish()
+        }
+    }
 
     private fun filter(text: String) {
         val filteredList: ArrayList<Fruit> = ArrayList()
@@ -103,6 +118,12 @@ class FruitActivitiy : AppCompatActivity() {
     private fun goToHomeActivity() {
         val goToHomeActivity = Intent(this, MainActivity::class.java)
         startActivity(goToHomeActivity)
+        finish()
+    }
+
+    private fun goToCartActivity() {
+        val goToCartActivity = Intent(this, CartActivity::class.java)
+        startActivity(goToCartActivity)
         finish()
     }
 
@@ -155,7 +176,6 @@ class FruitActivitiy : AppCompatActivity() {
         }
         fruit = Fruit(id, name, name, price)
         fruitList.add(fruit)
-        System.out.println("meyveler geldi")
 
         recyclerViewFruitAdapter!!.notifyDataSetChanged()
     }

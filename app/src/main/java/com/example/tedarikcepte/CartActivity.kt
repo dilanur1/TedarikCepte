@@ -1,21 +1,38 @@
 package com.example.tedarikcepte
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 
 class CartActivity: AppCompatActivity() {
     private lateinit var  backBtn: ImageView
     private  lateinit var recyclerView: RecyclerView
-    /*private  lateinit var productsInCartAdapter: ProductsInCartAdapter*/
-    private lateinit var cartViewModel: CartViewModel
+    private var productsInCartList = mutableListOf<Product>()
+    private  lateinit var productsInCartAdapter: ProductsInCartAdapter
+    var sum: Double = 0.0
+    private lateinit var emptyCartLayout: ConstraintLayout
+    private lateinit var notEmptySV: ScrollView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -23,28 +40,114 @@ class CartActivity: AppCompatActivity() {
 
         backBtn = findViewById(R.id.backBtn)
         recyclerView = findViewById(R.id.cardView)
+        val sessionManagement = SessionManagement(this)
+        val user = sessionManagement.getUser()
+        val userId = user["user_id"] as Long
         goBack()
-        initList()
+
         val category = intent.getStringExtra("fruitCategory")
         val price  = intent.getStringExtra("fruitPrice")
 
-        cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
-
-/*
+        productsInCartAdapter = ProductsInCartAdapter(this@CartActivity, productsInCartList, this)
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 1)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = productsInCartAdapter*/
-/*        if (category != null) {
-            if (price != null) {
-                addDataToCartList(category, price)
-            }
-        }
-        val productsInCartList = cartViewModel.getProducts()
-        productsInCartAdapter = ProductsInCartAdapter(this@CartActivity, productsInCartList, this)
-        cartViewModel.getProducts()*/
+        recyclerView.adapter = productsInCartAdapter
+        getProductsInCart(userId)
 
+        productsInCartAdapter.setOnItemClickListener(object: ProductsInCartAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val user = sessionManagement.getUser()
+                val userId = user["user_id"] as Long
+                showQuantityDialog(this@CartActivity) { quantity ->
+
+                }
+
+            }
+        })
 
     }
+
+
+
+    private fun getProductsInCart(userId: Long) {
+
+        val requestQueue = Volley.newRequestQueue(this)
+        val url = "http://192.168.56.1:8080/api/v1/cart?user_id=$userId"
+
+        val jsonArrayRequest = object : JsonArrayRequest(
+            Request.Method.GET, url, null,
+            Response.Listener<JSONArray> { response ->
+                notEmptySV.visibility = View.VISIBLE
+                emptyCartLayout.visibility = View.INVISIBLE
+                //progressBar.visibility = View.GONE
+                for (i in 0 until response.length()) {
+
+                    try {
+                        val jsonObject: JSONObject = response.getJSONObject(i)
+                        addDataToList(jsonObject, userId)
+
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        System.out.println(e)
+                    }
+
+                }
+
+            },
+            Response.ErrorListener { error ->
+                error.printStackTrace()
+                notEmptySV.visibility = View.INVISIBLE
+                emptyCartLayout.visibility = View.VISIBLE
+
+            }) {
+
+        }
+
+        requestQueue.add(jsonArrayRequest)
+
+    }
+
+    private fun addDataToList(jsonObject: JSONObject, userId: Long) {
+
+
+        var productId: Long = jsonObject.getLong("product_id")
+        var name: String = jsonObject.getString("name")
+        val price: Double = jsonObject.getDouble("price")
+
+        val requestQueue = Volley.newRequestQueue(this)
+        val url = "http://192.168.56.1:8080/api/v1/cart_product/quantity?user_id=$userId&product_id=$productId"
+
+        val stringRequest = object :StringRequest (Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                //progressBar.visibility = View.GONE
+                val quantity = response.toDouble()
+
+                val product = Product(productId, name, name, price, quantity)
+                calculateTotalPrice(price, quantity)
+                productsInCartList.add(product)
+
+                productsInCartAdapter!!.notifyDataSetChanged()
+            },
+            Response.ErrorListener { error ->
+                error.printStackTrace()
+                System.out.println(error)
+                Toast.makeText(this, "Sepette ürün bulunamadı!", Toast.LENGTH_LONG).show()
+            }) {
+
+        }
+
+        requestQueue.add(stringRequest)
+
+    }
+
+    private fun calculateTotalPrice(price: Double, quantity: Double) {
+        sum = sum + (price*quantity)
+
+        val totalPrice: TextView = findViewById(R.id.totalPrice)
+        totalPrice.text = sum.toString()
+    }
+
 
     private fun goBack() {
         backBtn.setOnClickListener {
@@ -52,55 +155,24 @@ class CartActivity: AppCompatActivity() {
         }
     }
 
-    private fun initList() {
+    fun showQuantityDialog(context: Context, onConfirm: (quantity: Double) -> Unit) {
+        val editText = EditText(context)
+        editText.hint = "Lütfen kaç kilogram istediğinizi giriniz."
 
-
+        AlertDialog.Builder(context)
+            .setTitle("Miktarı güncelleyin")
+            .setView(editText)
+            .setPositiveButton("Güncelle") { dialog, _ ->
+                val quantityString = editText.text.toString()
+                val quantity = if (quantityString.isNotEmpty()) quantityString.toDouble() else 0.0
+                onConfirm(quantity)
+                dialog.dismiss()
+            }
+            .setNegativeButton("İptal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
-
-    private fun addDataToCartList(category: String, price: String) {
-        /* var fruit: Fruit? = null
-
-         var category: String = jsonObject.getString("category")
-         val price: Double = jsonObject.getDouble("price")
-         val number: Int = jsonObject.getInt("number")
-
-         if(category == "üzüm") {category = "uzum"}*/
-
-/*
-
-        val priceWithoutTL = price.split(" ")[0]
-        var product: Product? = null
-        product = Fruit(null, category, category, priceWithoutTL.toDouble())
-        cartViewModel.addProduct(product)
-
-*/
-
-/*
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)
-        product = Fruit("elma", "elma", "10".toDouble(), "12".toInt())
-        productsInCartList.add(product)*/
-       /* productsInCartAdapter!!.notifyDataSetChanged()*/
-    }
-
-/*    private fun getProductsInCart() {
-        cartViewModel.getProducts()
-    }*/
-
 
 }
 

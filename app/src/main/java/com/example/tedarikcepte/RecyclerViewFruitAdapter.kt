@@ -19,15 +19,17 @@ import com.bumptech.glide.Glide
 
 class RecyclerViewFruitAdapter(
 
-    private val getActivity: FruitActivitiy,
+    private val getActivity: FruitActivity,
     private var fruitList: List<Fruit>,
-    val context: Context) :
+    val context: Context
+) :
 
     RecyclerView.Adapter<RecyclerViewFruitAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_list_product, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.viewholder_list_product, parent, false)
         return ViewHolder(view)
     }
 
@@ -39,13 +41,17 @@ class RecyclerViewFruitAdapter(
         fruitList = filteredList
         notifyDataSetChanged()
     }
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.meyveTitle.text = fruitList[position].category
-        //holder.meyveImg.setImageResource(fruitList[position].image)
-        holder.meyveFiyat.text = fruitList[position].price.toString() + " TL"
 
-        val drawableResourceId: Int = holder.itemView.resources.getIdentifier(fruitList[position].imagePath, "drawable", holder.itemView.context.packageName);
-        Glide.with(context).load(drawableResourceId).into(holder.meyveImg)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.title.text = fruitList[position].category
+        holder.price.text = fruitList[position].price.toString() + " TL/kg"
+
+        val drawableResourceId: Int = holder.itemView.resources.getIdentifier(
+            fruitList[position].imagePath,
+            "drawable",
+            holder.itemView.context.packageName
+        );
+        Glide.with(context).load(drawableResourceId).into(holder.img)
 
 
     }
@@ -61,24 +67,16 @@ class RecyclerViewFruitAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val meyveTitle : TextView = itemView.findViewById(R.id.category)
-        val meyveImg : ImageView = itemView.findViewById(R.id.productImg)
-        val cardView : CardView = itemView.findViewById(R.id.productCardView)
-        val meyveFiyat : TextView = itemView.findViewById(R.id.price)
-        val addToCartBtn : Button = itemView.findViewById(R.id.addToCartBtn)
+        val title: TextView = itemView.findViewById(R.id.category)
+        val img: ImageView = itemView.findViewById(R.id.productImg)
+        val cardView: CardView = itemView.findViewById(R.id.productCardView)
+        val price: TextView = itemView.findViewById(R.id.price)
+        val addToCartBtn: Button = itemView.findViewById(R.id.addToCartBtn)
 
         init {
             addToCartBtn.setOnClickListener {
                 listener?.onItemClick(adapterPosition)
             }
-        }
-
-        private fun addToCart(fruit: Fruit) {
-/*            val intent = Intent(context, CartActivity::class.java)
-            intent.putExtra("fruitCategory", meyveTitle.text.toString())
-            intent.putExtra("fruitPrice", meyveFiyat.text.toString())
-
-            context.startActivity(intent)*/
         }
     }
 

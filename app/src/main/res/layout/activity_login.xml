@@ -1,168 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="411dp"
-    android:layout_height="1000dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".LoginActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient"
-        android:gravity="center"
-        android:minHeight="891dp"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:context=".LoginActivity">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="129dp"
-            android:layout_height="134dp"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="-3dp"
-            android:adjustViewBounds="false"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toStartOf="@+id/tedarikCepteTxt"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tedarikCepteTxt"
-            app:layout_constraintBottom_toBottomOf="@id/tedarikCepteTxt"
-            app:srcCompat="@drawable/logo3" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/usernameField"
-            android:layout_width="350dp"
-            android:layout_height="59dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:background="@color/lightorange"
-            android:drawableStart="@drawable/baseline_person_24"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="@string/kullanici_adi"
-            android:inputType="text"
-            android:linksClickable="false"
-            android:paddingStart="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tedarikCepteTxt" />
+            <EditText
+                android:id="@+id/usernameField"
+                android:layout_width="350dp"
+                android:layout_height="59dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="24dp"
+                android:background="@color/lightorange"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/kullanici_adi"
+                android:inputType="text"
+                android:linksClickable="false"
+                android:paddingStart="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/passwordField"
+                app:layout_constraintEnd_toEndOf="@+id/passwordField"
+                app:layout_constraintStart_toStartOf="@+id/passwordField" />
 
-        <EditText
-            android:id="@+id/passwordField"
-            android:layout_width="350dp"
-            android:layout_height="59dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/lightorange"
-            android:drawableStart="@drawable/baseline_lock_24"
-            android:drawablePadding="10dp"
-            android:paddingStart="10dp"
-            android:ems="10"
-            android:hint="@string/parola"
-            android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/usernameField" />
+            <EditText
+                android:id="@+id/passwordField"
+                android:layout_width="350dp"
+                android:layout_height="59dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="5dp"
+                android:background="@color/lightorange"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/parola"
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/passwordShowIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:src="@drawable/password_show"
-            app:layout_constraintBottom_toBottomOf="@+id/passwordField"
-            app:layout_constraintEnd_toEndOf="@+id/passwordField"
-            app:layout_constraintTop_toTopOf="@+id/passwordField">
+            <ImageView
+                android:id="@+id/passwordShowIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="true"
+                android:src="@drawable/password_show"
+                app:layout_constraintBottom_toBottomOf="@+id/passwordField"
+                app:layout_constraintTop_toTopOf="@+id/passwordField"
+                app:layout_constraintEnd_toEndOf="@id/passwordField"
+                android:layout_marginEnd="8dp"
+                tools:layout_editor_absoluteX="345dp">
 
-        </ImageView>
+            </ImageView>
 
-        <ImageView
-            android:id="@+id/passwordHideIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:src="@drawable/password_hide"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/passwordField"
-            app:layout_constraintEnd_toEndOf="@+id/passwordField"
-            app:layout_constraintTop_toTopOf="@+id/passwordField">
+            <ImageView
+                android:id="@+id/passwordHideIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="true"
+                android:src="@drawable/password_hide"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/passwordField"
+                app:layout_constraintTop_toTopOf="@+id/passwordField"
+                app:layout_constraintEnd_toEndOf="@id/passwordField"
+                android:layout_marginEnd="8dp"
+                tools:layout_editor_absoluteX="345dp">
 
-        </ImageView>
+            </ImageView>
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="254dp"
-            android:layout_height="62dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
-            android:backgroundTint="@color/white"
-            android:clickable="true"
-            android:text="@string/giris_yap"
-            android:textColor="@color/orange"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/forgotPasswordTxt" />
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="254dp"
+                android:layout_height="62dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:text="@string/giris_yap"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTxt" />
 
-        <TextView
-            android:id="@+id/tedarikCepteTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="176dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="143dp"
-            android:text="TEDARİK\nCEPTE"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tedarikCepteTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50dp"
+                android:text="GİRİŞ YAP"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@+id/usernameField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/forgotPasswordTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:text="@string/sifremi_unuttum"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordField" />
+            <TextView
+                android:id="@+id/forgotPasswordTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:text="@string/sifremi_unuttum"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/passwordField"
+                app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
-        <TextView
-            android:id="@+id/kayıtOlTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:clickable="true"
-            android:text="@string/kayit_ol"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginButton"
-            tools:layout_editor_absoluteY="818dp" />
+            <TextView
+                android:id="@+id/kayıtOlTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:text="@string/kayit_ol"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

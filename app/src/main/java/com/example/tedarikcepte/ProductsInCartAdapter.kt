@@ -29,16 +29,32 @@ class ProductsInCartAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val price = productsInCartList[position].price
+        val quantity = productsInCartList[position].quantity as Double
+        val sumOfPrice: Double = price*quantity
+
         holder.category.text = productsInCartList[position].category
-        holder.price.text = productsInCartList[position].price.toString() + " TL"
+        holder.price.text = sumOfPrice.toString() + " TL"
+        holder.quantity.text = productsInCartList[position].quantity.toString() + " kg"
 
         val drawableResourceId: Int = holder.itemView.resources.getIdentifier(productsInCartList[position].imagePath, "drawable", holder.itemView.context.packageName);
         Glide.with(context).load(drawableResourceId).into(holder.img)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val category: TextView = itemView.findViewById(R.id.title)
         val price: TextView = itemView.findViewById(R.id.price)
         val img: ImageView = itemView.findViewById(R.id.productImg)
+        val quantity: TextView = itemView.findViewById(R.id.quantity)
     }
 }
