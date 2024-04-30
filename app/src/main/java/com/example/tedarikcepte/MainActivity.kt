@@ -1,14 +1,15 @@
 package com.example.tedarikcepte
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ActionMode
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
 

@@ -43,6 +43,8 @@ class FruitActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.fruitRV)
         searchView = findViewById(R.id.searchView)
+        backBtn = findViewById(R.id.backBtn)
+
         val sessionManagement = SessionManagement(this)
 
 

@@ -2,11 +2,14 @@ package com.example.tedarikcepte
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -25,14 +28,18 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-class CartActivity: AppCompatActivity() {
-    private lateinit var  backBtn: ImageView
-    private  lateinit var recyclerView: RecyclerView
+class CartActivity : AppCompatActivity() {
+    private lateinit var backBtn: ImageView
+    private lateinit var recyclerView: RecyclerView
     private var productsInCartList = mutableListOf<Product>()
-    private  lateinit var productsInCartAdapter: ProductsInCartAdapter
+    private lateinit var productsInCartAdapter: ProductsInCartAdapter
     var sum: Double = 0.0
     private lateinit var emptyCartLayout: ConstraintLayout
     private lateinit var notEmptySV: ScrollView
+    private lateinit var backShoppingBtn: Button
+    private lateinit var giveOrderBtn: Button
+    private lateinit var paymentRadioBtn: RadioGroup
+    private lateinit var totalPrice: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
@@ -40,13 +47,38 @@ class CartActivity: AppCompatActivity() {
 
         backBtn = findViewById(R.id.backBtn)
         recyclerView = findViewById(R.id.cardView)
+        emptyCartLayout = findViewById(R.id.emptyCartLayout)
+        notEmptySV = findViewById(R.id.notEmptySV)
+        backShoppingBtn = findViewById(R.id.backShoppingBtn)
+        giveOrderBtn = findViewById(R.id.giveOrderBtn)
+        paymentRadioBtn = findViewById(R.id.paymentRadioBtn)
+        totalPrice = findViewById(R.id.totalPrice)
+
+        backShoppingBtn.setOnClickListener {
+            goToHomeActivity()
+        }
+
+        giveOrderBtn.setOnClickListener {
+            if (paymentRadioBtn.checkedRadioButtonId == -1) {
+                giveOrderBtn.isClickable = false
+                Toast.makeText(this, "Lütfen ödeme yöntemi seçin.", Toast.LENGTH_SHORT).show()
+            } else {
+                val selectedPaymentMethodId = paymentRadioBtn.checkedRadioButtonId
+                val selectedPaymentMethod = findViewById<RadioButton>(selectedPaymentMethodId)
+                val selectedOptionTxt = selectedPaymentMethod.text
+                val totalPriceDouble = totalPrice.text.split(" ").first()
+                giveOrder(productsInCartList, selectedOptionTxt, totalPriceDouble.toDouble())
+            }
+
+        }
+
         val sessionManagement = SessionManagement(this)
         val user = sessionManagement.getUser()
         val userId = user["user_id"] as Long
         goBack()
 
         val category = intent.getStringExtra("fruitCategory")
-        val price  = intent.getStringExtra("fruitPrice")
+        val price = intent.getStringExtra("fruitPrice")
 
         productsInCartAdapter = ProductsInCartAdapter(this@CartActivity, productsInCartList, this)
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 1)
@@ -54,12 +86,12 @@ class CartActivity: AppCompatActivity() {
         recyclerView.adapter = productsInCartAdapter
         getProductsInCart(userId)
 
-        productsInCartAdapter.setOnItemClickListener(object: ProductsInCartAdapter.OnItemClickListener {
+        productsInCartAdapter.setOnItemClickListener(object :
+            ProductsInCartAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val user = sessionManagement.getUser()
                 val userId = user["user_id"] as Long
                 showQuantityDialog(this@CartActivity) { quantity ->
-
                 }
 
             }
@@ -67,6 +99,15 @@ class CartActivity: AppCompatActivity() {
 
     }
 
+    private fun giveOrder(productsInCartList: MutableList<Product>, selectedOptionTxt: CharSequence?, toDouble: Double) {
+
+    }
+
+    private fun goToHomeActivity() {
+        val goToHomeActivity = Intent(this, MainActivity::class.java)
+        startActivity(goToHomeActivity)
+        finish()
+    }
 
 
     private fun getProductsInCart(userId: Long) {
@@ -78,7 +119,7 @@ class CartActivity: AppCompatActivity() {
             Request.Method.GET, url, null,
             Response.Listener<JSONArray> { response ->
                 notEmptySV.visibility = View.VISIBLE
-                emptyCartLayout.visibility = View.INVISIBLE
+                emptyCartLayout.visibility = View.GONE
                 //progressBar.visibility = View.GONE
                 for (i in 0 until response.length()) {
 
@@ -97,7 +138,7 @@ class CartActivity: AppCompatActivity() {
             },
             Response.ErrorListener { error ->
                 error.printStackTrace()
-                notEmptySV.visibility = View.INVISIBLE
+                notEmptySV.visibility = View.GONE
                 emptyCartLayout.visibility = View.VISIBLE
 
             }) {
@@ -116,9 +157,10 @@ class CartActivity: AppCompatActivity() {
         val price: Double = jsonObject.getDouble("price")
 
         val requestQueue = Volley.newRequestQueue(this)
-        val url = "http://192.168.56.1:8080/api/v1/cart_product/quantity?user_id=$userId&product_id=$productId"
+        val url =
+            "http://192.168.56.1:8080/api/v1/cart_product/quantity?user_id=$userId&product_id=$productId"
 
-        val stringRequest = object :StringRequest (Request.Method.GET, url,
+        val stringRequest = object : StringRequest(Request.Method.GET, url,
             Response.Listener<String> { response ->
                 //progressBar.visibility = View.GONE
                 val quantity = response.toDouble()
@@ -142,10 +184,8 @@ class CartActivity: AppCompatActivity() {
     }
 
     private fun calculateTotalPrice(price: Double, quantity: Double) {
-        sum = sum + (price*quantity)
-
-        val totalPrice: TextView = findViewById(R.id.totalPrice)
-        totalPrice.text = sum.toString()
+        sum = sum + (price * quantity)
+        totalPrice.text = sum.toString() + " TL"
     }
 
 

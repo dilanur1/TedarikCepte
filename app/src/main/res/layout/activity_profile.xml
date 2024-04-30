@@ -118,37 +118,6 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/iptal_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/siparis_iptal_icon"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:padding="12dp"
-                        android:src="@drawable/baseline_cancel_24" />
-
-                    <TextView
-                        android:id="@+id/iptal_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/siparis_iptal_icon"
-                        android:text="Siparişimi iptal et"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/baseline_arrow_forward_ios_24" />
-
-                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -156,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/cart_backg"
                 android:orientation="vertical"
@@ -171,7 +140,7 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:padding="12dp"
-                        android:src="@drawable/baseline_change_circle_24" />
+                        android:src="@drawable/baseline_person_24" />
 
                     <TextView
                         android:id="@+id/guncelle_text"
@@ -224,6 +193,18 @@
 
                 </RelativeLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/backg3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/cart_backg"
+                android:orientation="vertical"
+                android:padding="15dp">
+
                 <RelativeLayout
                     android:id="@+id/signOutLayout"
                     android:layout_width="match_parent"
@@ -256,6 +237,7 @@
                         android:src="@drawable/baseline_arrow_forward_ios_24" />
 
                 </RelativeLayout>
+
             </LinearLayout>
 
         </LinearLayout>

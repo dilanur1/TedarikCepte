@@ -157,7 +157,7 @@
             android:background="@color/lightorange"
             android:drawableLeft="@drawable/baseline_contact_phone_24"
             android:ems="10"
-            android:hint="Telefon Numarası"
+            android:hint="(5__) ___ ____"
             android:drawablePadding="10dp"
             android:inputType="phone"
             android:linksClickable="false"
@@ -167,7 +167,8 @@
             app:layout_constraintBottom_toTopOf="@id/usernameField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
         <EditText
             android:id="@+id/addressField"
